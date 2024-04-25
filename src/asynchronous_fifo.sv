@@ -3,7 +3,7 @@
 `include "rptr_handler.sv"
 `include "fifo_mem.sv"
 
-module asynchronous_fifo #(parameter DEPTH=8, DATA_WIDTH=8) (
+module asynchronous_fifo #(parameter DEPTH=64, DATA_WIDTH=32) (
   input logic wclk, wrst_n,
   input logic rclk, rrst_n,
   input logic w_en, r_en,

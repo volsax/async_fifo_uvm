@@ -8,54 +8,46 @@ import scoreboard::*;
 import tests::*;
 
 
-module dut(dut_in _in, dut_out _out);
+module dut(dut_write _wrif, dut_read _rrif);
 asynchronous_fifo async0(
-    .wclk(_in.wclk),
-    .wrst_n(_in.wrst_n),
-    .rclk(_in.rclk),
-    .rrst_n(_in.rrst_n),
-    .w_en(_in.w_en),
-    .r_en(_in.r_en),
-    .data_in(_out.data_in),
-    .data_out(_out.data_out),
-    .full(_out.full),
-    .empty(_out.empty)
+    .wclk(_wrif.wclk),
+    .wrst_n(_wrif.wrst_n),
+    .rclk(_rrif.rclk),
+    .rrst_n(_rrif.rrst_n),
+    .w_en(_wrif.w_en),
+    .r_en(_rrif.r_en),
+    .data_in(_wrif.data_in),
+    .data_out(_rrif.data_out),
+    .full(_wrif.full),
+    .empty(_rrif.empty)
 );
 endmodule: dut
 
 module top;    
-dut_in dut_in1();
-dut_out dut_out1();
+dut_write wrif();
+dut_read  rrif();
 
 initial begin
-    dut_in1.wclk<=0;
+    wrif.wclk<=0;
     forever #50 dut_in1.wclk<=~dut_in1.wclk;
 end
 
-initial begin
-    dut_out1.wclk<=0;
-    forever #50 dut_out1.rclk<=~dut_out1.rclk;
-end
 
 initial begin
-    dut_in1.rclk<=0;
+    rrif.rclk<=0;
     forever #50 dut_out1.wclk<=~dut_out1.wclk;
 end
 
-initial begin
-    dut_out1.rclk<=0;
-    forever #50 dut_out1.rclk<=~dut_out1.rclk;
-end
 
 // TODO: Instantiate the dut module as dut1 and use the input as dut_in1 and output as dut_out1
 dut dut1(
-    ._in(dut_in1),
-    ._out(dut_out1)
+    ._wrif(wrif),
+    ._rrif(rrif)
 );
 
 initial begin
-    uvm_config_db #(virtual dut_in)::set(null,"uvm_test_top","dut_vi_in",dut_in1);
-    uvm_config_db #(virtual dut_out)::set(null,"uvm_test_top","dut_vi_out",dut_out1);
+    uvm_config_db #(virtual dut_write)::set(null,"uvm_test_top","dut_vi_in",wrif);
+    uvm_config_db #(virtual dut_read)::set(null,"uvm_test_top","dut_vi_out",rrif);
     uvm_top.finish_on_completion=1;
 
     //TODO:Modify the test name here
