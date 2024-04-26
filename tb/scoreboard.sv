@@ -1,7 +1,8 @@
 `include "uvm_macros.svh"
 package scoreboard; 
 import uvm_pkg::*;
-import sequences::*;
+import sequences_read::*;
+import sequences_write::*;
 
 class async_fifo_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(alu_scoreboard)

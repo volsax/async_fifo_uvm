@@ -2,7 +2,8 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 import modules_pkg::*;
-import sequences::*;
+import sequences_read::*;
+import sequences_write::*;
 import coverage::*;
 import scoreboard::*;
 import tests::*;
@@ -27,15 +28,15 @@ module top;
 dut_write wrif();
 dut_read  rrif();
 
+// Drive the read and write clock
 initial begin
     wrif.wclk<=0;
-    forever #50 dut_in1.wclk<=~dut_in1.wclk;
+    forever #50 wrif.wclk<=~wrif.wclk;
 end
-
 
 initial begin
     rrif.rclk<=0;
-    forever #50 dut_out1.wclk<=~dut_out1.wclk;
+    forever #50 rrif.wclk<=~rrif.wclk;
 end
 
 
@@ -46,8 +47,8 @@ dut dut1(
 );
 
 initial begin
-    uvm_config_db #(virtual dut_write)::set(null,"uvm_test_top","dut_vi_in",wrif);
-    uvm_config_db #(virtual dut_read)::set(null,"uvm_test_top","dut_vi_out",rrif);
+    uvm_config_db #(virtual dut_write)::set(null,"uvm_test_top","dut_vi_write",wrif);
+    uvm_config_db #(virtual dut_read)::set(null,"uvm_test_top","dut_vi_read",rrif);
     uvm_top.finish_on_completion=1;
 
     //TODO:Modify the test name here

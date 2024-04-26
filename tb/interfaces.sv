@@ -1,5 +1,5 @@
 interface dut_write #(
-    parameter DATA_WIDTH = 8
+    parameter DATA_WIDTH = 32
 );
     logic  wclk, wrst_n;
     logic  w_en;
@@ -8,7 +8,7 @@ interface dut_write #(
 endinterface: dut_write
 
 interface dut_read #(
-    parameter DATA_WIDTH = 8
+    parameter DATA_WIDTH = 32
 );
     logic  rclk, rrst_n;
     logic  r_en;

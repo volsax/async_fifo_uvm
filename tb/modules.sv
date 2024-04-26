@@ -2,12 +2,13 @@
 package modules_pkg;
 
 import uvm_pkg::*;
-import sequences::*;
+import sequences_read::*;
+import sequences_write::*;
 import coverage::*;
 import scoreboard::*;
 
-typedef uvm_sequencer #() async_fifo_read_sequencer;
-typedef uvm_sequencer #() async_fifo_write_sequencer;
+typedef uvm_sequencer #(async_fifo_transaction_read) async_fifo_read_sequencer;
+typedef uvm_sequencer #(async_fifo_transaction_write) async_fifo_write_sequencer;
 
 class async_fifo_dut_config extends uvm_object;
     `uvm_object_utils(async_fifo_dut_config)
@@ -17,7 +18,7 @@ class async_fifo_dut_config extends uvm_object;
 
 endclass: async_fifo_dut_config
 
-class async_fifo_read_driver extends uvm_driver#(alu_transaction_in); // TODO change alu_transaction_in to afifo
+class async_fifo_read_driver extends uvm_driver#(async_fifo_transaction_read); // TODO change alu_transaction_in to afifo
     `uvm_component_utils(async_fifo_read_driver)
 
     async_fifo_dut_config dut_config_0;
@@ -36,24 +37,21 @@ class async_fifo_read_driver extends uvm_driver#(alu_transaction_in); // TODO ch
       forever
       begin
         // TODO change alu_transaction_in tx to our async fifo tx
-        alu_transaction_in tx;
+        async_fifo_transaction_read tx;
         
         @(posedge dut_vi_read.rclk);
         seq_item_port.get(tx);
        
         // TODO: Drive values from async fifo tx onto the virtual
         // interface of dut_vi_read
-        dut_vi_read.A <= tx.A;
-        dut_vi_read.B <= tx.B;
-        dut_vi_read.CIN <= tx.CIN;
-        dut_vi_read.opcode <= tx.opcode;
-        dut_vi_read.rst <= tx.rst;
+        dut_vi_read.r_en <= tx.r_en;
+        dut_vi_read.rrst_n <= tx.rrst_n;
       end
     endtask: run_phase
 
 endclass: async_fifo_read_driver
 
-class async_fifo_write_driver extends uvm_driver#(alu_transaction_in); // TODO change alu_transaction_in to afifo
+class async_fifo_write_driver extends uvm_driver#(async_fifo_transaction_write); // TODO change alu_transaction_in to afifo
     `uvm_component_utils(async_fifo_write_driver)
 
     async_fifo_dut_config dut_config_0;
@@ -72,18 +70,17 @@ class async_fifo_write_driver extends uvm_driver#(alu_transaction_in); // TODO c
       forever
       begin
         // TODO change alu_transaction_in tx
-        alu_transaction_in tx;
+        async_fifo_transaction_write tx;
         
         @(posedge dut_vi_write.wclk);
+        // Get the sequence from the sequence
         seq_item_port.get(tx);
        
         // TODO: Drive values from alu_transaction_in onto the virtual
         // interface of dut_vi_in
-        dut_vi_write.A <= tx.A;
-        dut_vi_write.B <= tx.B;
-        dut_vi_write.CIN <= tx.CIN;
-        dut_vi_write.opcode <= tx.opcode;
-        dut_vi_write.rst <= tx.rst;
+        dut_vi_write.w_en <= tx.w_en;
+        dut_vi_write.wrst_n <= tx.wrst_n;
+        dut_vi_write.data_in <= tx.data_in;
       end
     endtask: run_phase
 
@@ -92,7 +89,7 @@ endclass: async_fifo_write_driver
 class async_fifo_write_monitor extends uvm_monitor;
     `uvm_component_utils(async_fifo_write_monitor)
 
-    uvm_analysis_port #(alu_transaction_in) aport; //TODO: change alu transaction
+    uvm_analysis_port #(async_fifo_transaction_write) aport;
 
     async_fifo_dut_config dut_config_0;
 
@@ -105,6 +102,7 @@ class async_fifo_write_monitor extends uvm_monitor;
     function void build_phase(uvm_phase phase);
         dut_config_0=async_fifo_dut_config::type_id::create("config");
         aport=new("aport",this);
+        // Not sure what this is about
         assert( uvm_config_db #(async_fifo_dut_config)::get(this, "", "dut_config", dut_config_0) );
         dut_vi_write=dut_config_0.dut_vi_write;
     endfunction: build_phase
@@ -113,17 +111,16 @@ class async_fifo_write_monitor extends uvm_monitor;
     @(posedge dut_vi_write.wclk);
       forever
       begin
-        alu_transaction_in tx;    // TODO: create async fifo tx
+        async_fifo_transaction_write tx;    // TODO: create async fifo tx
         @(posedge dut_vi_write.wclk);
-        tx = alu_transaction_in::type_id::create("tx");
+        tx = async_fifo_transaction_write::type_id::create("tx");
 
 	// TODO: Read the values from the virtual interface of dut_vi_in and
         // assign them to the transaction "tx"
-        tx.A = dut_vi_in.A;
-        tx.B = dut_vi_in.B;
-        tx.opcode = dut_vi_in.opcode;
-        tx.rst = dut_vi_in.rst;
-        tx.CIN = dut_vi_in.CIN;
+        tx.full = dut_vi_write.full;
+        tx.data_in = dut_vi_write.data_in;
+        tx.w_en = dut_vi_write.w_en;
+        tx.wrst_n = dut_vi_write.wrst_n;
         aport.write(tx);           // Write to the analysis port
         
       end
@@ -134,7 +131,7 @@ endclass: async_fifo_write_monitor
 class async_fifo_read_monitor extends uvm_monitor;
     `uvm_component_utils(async_fifo_read_monitor)
 
-    uvm_analysis_port #(alu_transaction_in) aport; //TODO: change alu transaction
+    uvm_analysis_port #(async_fifo_transaction_read) aport; //TODO: change alu transaction
 
     async_fifo_dut_config dut_config_0;
 
@@ -155,17 +152,16 @@ class async_fifo_read_monitor extends uvm_monitor;
     @(posedge dut_vi_read.wclk);
       forever
       begin
-        alu_transaction_in tx;    // TODO: create async fifo tx
+        async_fifo_transaction_read tx;    // TODO: create async fifo tx
         @(posedge dut_vi_read.wclk);
-        tx = alu_transaction_in::type_id::create("tx");
+        tx = async_fifo_transaction_read::type_id::create("tx");
 
 	// TODO: Read the values from the virtual interface of dut_vi_in and
         // assign them to the transaction "tx"
-        tx.A = dut_vi_in.A;
-        tx.B = dut_vi_in.B;
-        tx.opcode = dut_vi_in.opcode;
-        tx.rst = dut_vi_in.rst;
-        tx.CIN = dut_vi_in.CIN;
+        tx.rrst_n = dut_vi_read.rrst_n;
+        tx.r_en = dut_vi_read.r_en;
+        tx.data_out = dut_vi_read.data_out;
+        tx.empty = dut_vi_read.empty;
         aport.write(tx);           // read to the analysis port
         
       end
@@ -176,7 +172,7 @@ endclass: async_fifo_read_monitor
 class async_fifo_write_agent extends uvm_agent;
     `uvm_component_utils(async_fifo_write_agent)
 
-    uvm_analysis_port #(alu_transaction_in) aport;  // TODO: change alu transaction to async_fifo_transaction_write
+    uvm_analysis_port #(async_fifo_transaction_write) aport;  // TODO: change alu transaction to async_fifo_transaction_write
 
     async_fifo_write_sequencer async_fifo_write_sequencer_h;
     async_fifo_write_driver async_fifo_write_driver_h;
@@ -204,7 +200,7 @@ endclass: async_fifo_write_agent
 class async_fifo_read_agent extends uvm_agent;
     `uvm_component_utils(async_fifo_read_agent)
 
-    uvm_analysis_port #(alu_transaction_in) aport;  // TODO: change alu transaction to async_fifo_transaction_read
+    uvm_analysis_port #(async_fifo_transaction_read) aport;  // TODO: change alu transaction to async_fifo_transaction_read
 
     async_fifo_read_sequencer async_fifo_read_sequencer_h;
     async_fifo_read_driver async_fifo_read_driver_h;
@@ -281,7 +277,7 @@ class async_fifo_test extends uvm_test;
         if(!uvm_config_db #(virtual dut_read)::get( this, "", "dut_vi_read", dut_config_0.dut_vi_read))
           `uvm_fatal("NOVIF", "No virtual interface set for dut_read")
         
-        if(!uvm_config_db #(virtual dut_write)::get( this, "", "dut_vi_write", dut_config_0.dut_vi_wirte))
+        if(!uvm_config_db #(virtual dut_write)::get( this, "", "dut_vi_write", dut_config_0.dut_vi_write))
           `uvm_fatal("NOVIF", "No virtual interface set for dut_write")
             
         uvm_config_db #(async_fifo_dut_config)::set(this, "*", "dut_config", dut_config_0);
