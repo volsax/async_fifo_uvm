@@ -17,9 +17,9 @@ package sequences_read;
 
         // Add constraints here
         // When the AFIFO is empty, we can't read more value
-        constraint async_fifo_empty {
-          ( empty == 1'b1 ) -> ( r_en == 1'b0 );
-        }
+        // constraint async_fifo_empty {
+        //   ( empty == 1'b1 ) -> ( r_en == 1'b0 );
+        // }
 
         function new(string name = "");
             super.new(name);

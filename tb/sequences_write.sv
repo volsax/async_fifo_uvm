@@ -16,9 +16,9 @@ package sequences_write;
 
         // Add constraints here
         // When the AFIFO is full, we can't write more value
-        constraint async_fifo_full {
-          ( full == 1'b1 ) -> ( w_en == 1'b0 );
-        }
+        // constraint async_fifo_full {
+        //   ( full == 1'b1 ) -> ( w_en == 1'b0 );
+        // }
 
         // When write is not enabled, data_in should be 0
         constraint w_en_data_in {

@@ -4,7 +4,7 @@ package modules_pkg;
 import uvm_pkg::*;
 import sequences_read::*;
 import sequences_write::*;
-// import coverage::*;
+import coverage::*;
 import scoreboard::*;
 
 typedef uvm_sequencer #(async_fifo_transaction_read) async_fifo_read_sequencer;
@@ -149,11 +149,11 @@ class async_fifo_read_monitor extends uvm_monitor;
     endfunction: build_phase
 
     task run_phase(uvm_phase phase);
-    @(posedge dut_vi_read.wclk);
+    @(posedge dut_vi_read.rclk);
       forever
       begin
         async_fifo_transaction_read tx;    // TODO: create async fifo tx
-        @(posedge dut_vi_read.wclk);
+        @(posedge dut_vi_read.rclk);
         tx = async_fifo_transaction_read::type_id::create("tx");
 
 	// TODO: Read the values from the virtual interface of dut_vi_in and
@@ -230,8 +230,8 @@ class async_fifo_env extends uvm_env;
 
     async_fifo_read_agent async_fifo_read_agent_h;
     async_fifo_write_agent async_fifo_write_agent_h;
-    async_fifo_read_subscriber async_fifo_read_subscriber_h;
-    async_fifo_write_subscriber async_fifo_write_subscriber_h;
+    async_fifo_subscriber_read async_fifo_subscriber_read_h;
+    async_fifo_subscriber_write async_fifo_subscriber_write_h;
     async_fifo_scoreboard async_fifo_scoreboard_h;
 
     function new(string name, uvm_component parent);
@@ -241,14 +241,14 @@ class async_fifo_env extends uvm_env;
     function void build_phase(uvm_phase phase);
         async_fifo_read_agent_h = async_fifo_read_agent::type_id::create("async_fifo_read_agent_h",this);
         async_fifo_write_agent_h = async_fifo_write_agent::type_id::create("async_fifo_write_agent_h",this);
-        async_fifo_read_subscriber_h = async_fifo_read_subscriber::type_id::create("async_fifo_read_subscriber_h",this);
-        async_fifo_write_subscriber_h = async_fifo_write_subscriber::type_id::create("async_fifo_write_subscriber_h",this);
+        async_fifo_subscriber_read_h = async_fifo_subscriber_read::type_id::create("async_fifo_subscriber_read_h",this);
+        async_fifo_subscriber_write_h = async_fifo_subscriber_write::type_id::create("async_fifo_subscriber_write_h",this);
         async_fifo_scoreboard_h = async_fifo_scoreboard::type_id::create("async_fifo_scoreboard_h",this);
     endfunction: build_phase
 
     function void connect_phase(uvm_phase phase);
-        async_fifo_read_agent_h.aport.connect(async_fifo_read_subscriber_h.analysis_export);
-        async_fifo_write_agent_h.aport.connect(async_fifo_write_subscriber_h.analysis_export);
+        async_fifo_read_agent_h.aport.connect(async_fifo_subscriber_read_h.analysis_export);
+        async_fifo_write_agent_h.aport.connect(async_fifo_subscriber_write_h.analysis_export);
         // TODO verify the scoreboard structure and connect them correctly
         async_fifo_read_agent_h.aport.connect(async_fifo_scoreboard_h.sb_read);
         async_fifo_write_agent_h.aport.connect(async_fifo_scoreboard_h.sb_write);

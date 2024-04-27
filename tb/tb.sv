@@ -37,7 +37,7 @@ end
 
 initial begin
     dut_read1.rclk<=0;
-    forever #50 dut_read1.wclk<=~dut_read1.wclk;
+    forever #50 dut_read1.rclk<=~dut_read1.rclk;
 end
 
 

@@ -21,8 +21,8 @@ class test1 extends async_fifo_test;
 	assert( seq_write.randomize() );
     assert( seq_read.randomize() );
 	phase.raise_objection(this);
-	seq.start(async_fifo_env_h.async_fifo_read_agent_h.async_fifo_read_sequencer_h);
-    seq.start(async_fifo_env_h.async_fifo_write_agent.async_fifo_write_sequencer_h);
+	seq_read.start(async_fifo_env_h.async_fifo_read_agent_h.async_fifo_read_sequencer_h);
+    seq_write.start(async_fifo_env_h.async_fifo_write_agent_h.async_fifo_write_sequencer_h);
 	phase.drop_objection(this);
     endtask: run_phase     
 endclass: test1
