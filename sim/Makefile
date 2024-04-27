@@ -7,3 +7,5 @@ gui:
 clean:
 	rm -rf work/
 	rm -f transcript
+
+# module load mentor/modelsim/2016

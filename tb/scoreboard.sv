@@ -5,7 +5,7 @@ import sequences_read::*;
 import sequences_write::*;
 
 class async_fifo_scoreboard extends uvm_scoreboard;
-    `uvm_component_utils(alu_scoreboard)
+    `uvm_component_utils(async_fifo_scoreboard)
 
     uvm_analysis_export #(async_fifo_transaction_read) sb_read;
     uvm_analysis_export #(async_fifo_transaction_write) sb_write;
@@ -64,7 +64,7 @@ function void async_fifo_scoreboard::compare;
     ref_result = getresult();
 
 
-    if(tx_read.data_out != ref_result[31:0] || $isunknown(tx_read.out)) begin
+    if(tx_read.data_out != ref_result[31:0] || $isunknown(tx_read.data_out)) begin
         `uvm_error("1","Compare fail for OUT[31:0]");
         // `uvm_info("1", $sformatf("\nActual input A: %x, B: %x, opcode: %b, CIN %b ,rst: %b\nDUT output: %x, vout: %b, cout: %b\nExpected output: %x, vout: %b, cout: %b\n", tx_in.A, tx_in.B, tx_in.opcode, tx_in.CIN, tx_in.rst, tx_out.OUT, tx_out.VOUT, tx_out.COUT, ref_result[31:0], ref_result[33], ref_result[32]), UVM_HIGH);
     end

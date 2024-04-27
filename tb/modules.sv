@@ -4,7 +4,7 @@ package modules_pkg;
 import uvm_pkg::*;
 import sequences_read::*;
 import sequences_write::*;
-import coverage::*;
+// import coverage::*;
 import scoreboard::*;
 
 typedef uvm_sequencer #(async_fifo_transaction_read) async_fifo_read_sequencer;

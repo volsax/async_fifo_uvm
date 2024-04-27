@@ -1,6 +1,6 @@
 # do run.do
 # Model Technology ModelSim SE-64 vlog 10.6 Compiler 2016.12 Dec 13 2016
-# Start time: 00:07:07 on Apr 10,2024
+# Start time: 16:45:43 on Apr 26,2024
 # vlog -sv ../src/asynchronous_fifo.sv ../src/fifo_mem.sv ../src/rptr_handler.sv ../src/wptr_handler.sv ../src/synchronizer.sv 
 # -- Compiling module synchronizer
 # -- Compiling module wptr_handler
@@ -18,67 +18,59 @@
 # 
 # Top level modules:
 # 	asynchronous_fifo
-# End time: 00:07:07 on Apr 10,2024, Elapsed time: 0:00:00
+# End time: 16:45:43 on Apr 26,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 4
 # Model Technology ModelSim SE-64 vlog 10.6 Compiler 2016.12 Dec 13 2016
-# Start time: 00:07:07 on Apr 10,2024
-# vlog "+cover" -sv ../tb/async_fifo_tb.sv 
-# -- Compiling module async_fifo_TB
-# 
-# Top level modules:
-# 	async_fifo_TB
-# End time: 00:07:07 on Apr 10,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim -coverage -c async_fifo_TB 
-# Start time: 00:07:07 on Apr 10,2024
-# ** Note: (vsim-3812) Design is being optimized...
-# //  ModelSim SE-64 10.6 Dec 13 2016Linux 4.18.0-513.18.1.el8_9.x86_64
-# //
-# //  Copyright 1991-2016 Mentor Graphics Corporation
-# //  All Rights Reserved.
-# //
-# //  ModelSim SE-64 and its associated documentation contain trade
-# //  secrets and commercial or financial information that are the property of
-# //  Mentor Graphics Corporation and are privileged, confidential,
-# //  and exempt from disclosure under the Freedom of Information Act,
-# //  5 U.S.C. Section 552. Furthermore, this information
-# //  is prohibited from disclosure under the Trade Secrets Act,
-# //  18 U.S.C. Section 1905.
-# //
-# Loading sv_std.std
-# Loading work.async_fifo_TB(fast)
-# Loading work.asynchronous_fifo(fast)
-# Time = 1715: Comparison Passed: wr_data = xx and rd_data = xx
-# Time = 1855: Comparison Passed: wr_data = 72 and rd_data = 72
-# Time = 1995: Comparison Passed: wr_data = b2 and rd_data = b2
-# Time = 2135: Comparison Passed: wr_data = 10 and rd_data = 10
-# Time = 2275: Comparison Passed: wr_data = 30 and rd_data = 30
-# Time = 2415: Comparison Passed: wr_data = b5 and rd_data = b5
-# Time = 2555: Comparison Passed: wr_data = b6 and rd_data = b6
-# Time = 2695: Comparison Passed: wr_data = 14 and rd_data = 14
-# Time = 2835: Comparison Passed: wr_data = df and rd_data = df
-# Time = 2975: Comparison Passed: wr_data = bb and rd_data = bb
-# Time = 3115: Comparison Passed: wr_data = eb and rd_data = eb
-# Time = 3255: Comparison Passed: wr_data = 41 and rd_data = 41
-# Time = 3395: Comparison Passed: wr_data = 40 and rd_data = 40
-# Time = 3535: Comparison Passed: wr_data = 8a and rd_data = 8a
-# Time = 3675: Comparison Passed: wr_data = 03 and rd_data = 03
-# Time = 3815: Comparison Passed: wr_data = fc and rd_data = fc
-# Time = 3955: Comparison Passed: wr_data = 5d and rd_data = 5d
-# Time = 4095: Comparison Passed: wr_data = 1d and rd_data = 1d
-# Time = 4235: Comparison Passed: wr_data = 6a and rd_data = 6a
-# Time = 4375: Comparison Passed: wr_data = 16 and rd_data = 16
-# Time = 4515: Comparison Passed: wr_data = 3f and rd_data = 3f
-# Time = 4655: Comparison Passed: wr_data = 23 and rd_data = 23
-# Time = 4795: Comparison Passed: wr_data = a8 and rd_data = a8
-# Time = 4935: Comparison Passed: wr_data = 90 and rd_data = 90
-# Time = 5075: Comparison Passed: wr_data = 25 and rd_data = 25
-# Time = 5215: Comparison Passed: wr_data = 82 and rd_data = 82
-# Time = 5355: Comparison Passed: wr_data = 5b and rd_data = 5b
-# Time = 5495: Comparison Passed: wr_data = f2 and rd_data = f2
-# Time = 5635: Comparison Passed: wr_data = 31 and rd_data = 31
-# Time = 5775: Comparison Passed: wr_data = cd and rd_data = cd
-# ** Note: $finish    : ../tb/async_fifo_tb.sv(65)
-#    Time: 5825 ns  Iteration: 0  Instance: /async_fifo_TB
-# End time: 00:07:08 on Apr 10,2024, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
+# Start time: 16:45:43 on Apr 26,2024
+# vlog "+cover" -sv ../tb/interfaces.sv ../tb/sequences_write.sv ../tb/sequences_read.sv ../tb/scoreboard.sv ../tb/modules.sv ../tb/tests.sv ../tb/tb.sv 
+# -- Compiling interface dut_write
+# -- Compiling interface dut_read
+# ** Note: (vlog-2286) ../tb/sequences_write.sv(1): Using implicit +incdir+/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# -- Compiling package sequences_write
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# -- Compiling package sequences_read
+# -- Compiling package scoreboard
+# -- Importing package sequences_read
+# -- Importing package sequences_write
+# -- Compiling package modules_pkg
+# -- Importing package scoreboard
+# ** Error: ../tb/modules.sv(233): Invalid type 'async_fifo_read_subscriber'. Please check the type of the variable 'async_fifo_read_subscriber_h'.
+# ** Error: ../tb/modules.sv(234): Invalid type 'async_fifo_write_subscriber'. Please check the type of the variable 'async_fifo_write_subscriber_h'.
+# ** Error: ../tb/modules.sv(244): (vlog-2730) Undefined variable: 'async_fifo_read_subscriber_h'.
+# ** Error: ../tb/modules.sv(244): (vlog-2164) Class or package 'async_fifo_read_subscriber' not found.
+# ** Error: ../tb/modules.sv(244): (vlog-2730) Undefined variable: 'async_fifo_read_subscriber'.
+# ** Error: (vlog-13069) ../tb/modules.sv(244): near "::": syntax error, unexpected ::, expecting ';'.
+# ** Error: ../tb/modules.sv(245): (vlog-2730) Undefined variable: 'async_fifo_write_subscriber_h'.
+# ** Error: ../tb/modules.sv(245): (vlog-2164) Class or package 'async_fifo_write_subscriber' not found.
+# ** Error: ../tb/modules.sv(245): (vlog-2730) Undefined variable: 'async_fifo_write_subscriber'.
+# ** Error: (vlog-13069) ../tb/modules.sv(245): near "::": syntax error, unexpected ::, expecting ';'.
+# -- Compiling package tests
+# ** Error: ../tb/tests.sv(3): (vlog-13006) Could not find the package (modules_pkg).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+# ** Error: (vlog-13069) ../tb/tests.sv(9): near "async_fifo_test": syntax error, unexpected IDENTIFIER.
+# ** Error: ../tb/tests.sv(9): Error in class extension specification.
+# ** Error (suppressible): ../tb/tb.sv(11): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error (suppressible): ../tb/tb.sv(12): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error: ../tb/tb.sv(12): (vlog-13006) Could not find the package (modules_pkg).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+# ** Error (suppressible): ../tb/tb.sv(13): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error (suppressible): ../tb/tb.sv(14): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error (suppressible): ../tb/tb.sv(15): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error: ../tb/tb.sv(15): (vlog-13006) Could not find the package (coverage).  Design read will continue, but expect a cascade of errors after this failure.  Furthermore if you experience a vopt-7 error immediately before this error then please check the package names or the library search paths on the command line.
+# ** Error (suppressible): ../tb/tb.sv(16): (vlog-2744) An import statement is illegal when directly within a class scope.
+# ** Error (suppressible): ../tb/tb.sv(17): (vlog-2744) An import statement is illegal when directly within a class scope.
+# -- Compiling module dut
+# ** Error: ../tb/tb.sv(20): (vlog-2730) Undefined variable: '_wrif'.
+# ** Error: ../tb/tb.sv(33): Illegal use of 'automatic' for variable declaration (_wrif).
+# ** Error: ../tb/tb.sv(20): Identifier must be declared with a port mode: _wrif.
+# ** Error: ../tb/tb.sv(20): (vlog-2730) Undefined variable: '_rrif'.
+# ** Error: ../tb/tb.sv(33): Illegal use of 'automatic' for variable declaration (_rrif).
+# ** Error: ../tb/tb.sv(20): Identifier must be declared with a port mode: _rrif.
+# -- Compiling module top
+# ** Error: ../tb/tb.sv(53): Illegal use of 'automatic' for variable declaration (dut_write1).
+# ** Error: ../tb/tb.sv(54): Illegal use of 'automatic' for variable declaration (dut_read1).
+# End time: 16:45:44 on Apr 26,2024, Elapsed time: 0:00:01
+# Errors: 30, Warnings: 0
+# ** Error: /usr/local/packages/mentor_2016/modelsim10.6/modeltech/linux_x86_64/vlog failed.
+# Error in macro ./run.do line 10
+# /usr/local/packages/mentor_2016/modelsim10.6/modeltech/linux_x86_64/vlog failed.
+#     while executing
+# "vlog +cover -sv ../tb/interfaces.sv  ../tb/sequences_write.sv ../tb/sequences_read.sv ../tb/scoreboard.sv ../tb/modules.sv ../tb/tests.sv  ../tb/tb.sv..."

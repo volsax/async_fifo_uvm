@@ -8,72 +8,87 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/ecelrc/students/cl49625/verif_labs/final_project/sim
-T_opt
-!s110 1712725628
-VLlkBiMFS`6LoW2M2SB]WN3
-04 13 4 work async_fifo_TB fast 0
-=1-78ac444e8b23-66161e7c-5be3-168b45
-o-quiet -auto_acc_if_foreign -work work
-Z1 tCvgOpt 0
-n@_opt
-OL;O;10.6;65
-vasync_fifo_TB
-Z2 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z3 !s110 1712725627
-!i10b 1
-!s100 ;XHcz`ON0JMPgIRQ4V6GQ1
-Io_onFHh<cC=R=3<c?fIo=0
-Z4 VDg1SIo80bB@j0V0VzS_@n1
-!s105 async_fifo_tb_sv_unit
-S1
-R0
-w1712725616
-8../tb/async_fifo_tb.sv
-F../tb/async_fifo_tb.sv
-L0 1
-Z5 OL;L;10.6;65
-r1
-!s85 0
-31
-Z6 !s108 1712725627.000000
-!s107 ../tb/async_fifo_tb.sv|
-!s90 +cover|-sv|../tb/async_fifo_tb.sv|
-!i113 0
-!s102 +cover
-o+cover -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R1
-nasync_fifo_@t@b
 vasynchronous_fifo
-R2
-R3
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1714167943
 !i10b 1
-!s100 XbG6nXm9M<RT5]F`P8L>21
-IL35UPGO_0CVibdNjbAj@;1
-R4
+!s100 NJb5<<ciGK2?i2^]Ego[=2
+I3d_k3A<D^9z;;bo]E6j6h2
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 !s105 asynchronous_fifo_sv_unit
 S1
 R0
-w1712717430
+w1714012508
 8../src/asynchronous_fifo.sv
 F../src/asynchronous_fifo.sv
 L0 6
-R5
+Z4 OL;L;10.6;65
 r1
 !s85 0
 31
-R6
-Z7 !s107 ../src/synchronizer.sv|../src/wptr_handler.sv|../src/rptr_handler.sv|../src/fifo_mem.sv|../src/asynchronous_fifo.sv|
-Z8 !s90 -sv|../src/asynchronous_fifo.sv|../src/fifo_mem.sv|../src/rptr_handler.sv|../src/wptr_handler.sv|../src/synchronizer.sv|
+Z5 !s108 1714167943.000000
+Z6 !s107 ../src/synchronizer.sv|../src/wptr_handler.sv|../src/rptr_handler.sv|../src/fifo_mem.sv|../src/asynchronous_fifo.sv|
+Z7 !s90 -sv|../src/asynchronous_fifo.sv|../src/fifo_mem.sv|../src/rptr_handler.sv|../src/wptr_handler.sv|../src/synchronizer.sv|
 !i113 0
-Z9 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z8 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z9 tCvgOpt 0
+Ydut_read
 R1
-vfifo_mem
 R2
+!i10b 1
+!s100 D2<m_LUe<L]=7b22;_^KM3
+Ig77m6=gEL^0XXj20hDMY;3
 R3
+Z10 !s105 interfaces_sv_unit
+S1
+R0
+Z11 w1714105868
+Z12 8../tb/interfaces.sv
+Z13 F../tb/interfaces.sv
+L0 10
+R4
+r1
+!s85 0
+31
+R5
+Z14 !s107 /usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|/usr/local/packages/mentor_2016/modelsim10.6/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|../tb/tb.sv|../tb/tests.sv|../tb/modules.sv|../tb/scoreboard.sv|../tb/sequences_read.sv|../tb/sequences_write.sv|../tb/interfaces.sv|
+Z15 !s90 +cover|-sv|../tb/interfaces.sv|../tb/sequences_write.sv|../tb/sequences_read.sv|../tb/scoreboard.sv|../tb/modules.sv|../tb/tests.sv|../tb/tb.sv|
+!i113 0
+Z16 !s102 +cover
+Z17 o+cover -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R9
+Ydut_write
+R1
+R2
+!i10b 1
+!s100 E`S4Po:4c2bG2d>XX@]RH1
+IcCmi9VN?>EKGn<K3jeib_1
+R3
+R10
+S1
+R0
+R11
+R12
+R13
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+R14
+R15
+!i113 0
+R16
+R17
+R9
+vfifo_mem
+R1
+R2
 !i10b 1
 !s100 2j=fJdbfF9EEKFGLNJcP@3
 IaZ?l0Pz<>kmFOWkLQ>0[D3
-R4
+R3
 !s105 fifo_mem_sv_unit
 S1
 R0
@@ -81,23 +96,23 @@ w1712717349
 8../src/fifo_mem.sv
 F../src/fifo_mem.sv
 L0 1
-R5
+R4
 r1
 !s85 0
 31
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R1
 vrptr_handler
+R1
 R2
-R3
 !i10b 1
 !s100 nB^jCKI9fA5GfT48ee0KN0
 IWBg7VeKHT5=F`dgo<W?123
-R4
+R3
 !s105 rptr_handler_sv_unit
 S1
 R0
@@ -105,23 +120,100 @@ w1712722208
 8../src/rptr_handler.sv
 F../src/rptr_handler.sv
 L0 1
-R5
+R4
 r1
 !s85 0
 31
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
+Xscoreboard
 R1
+Z18 DXx6 mtiUvm 7 uvm_pkg 0 22 oMKUklN?>LE6@MJe7=2><1
+DXx4 work 14 sequences_read 0 22 [i_Q@h:iZ=c=KlJ;J]JDS2
+DXx4 work 15 sequences_write 0 22 hk_>jBEn;>V24Y;abkT:g2
+Z19 !s110 1714167944
+!i10b 1
+!s100 4PVJEMoY2jm7T4dg3zfgD1
+I04b^OQVlKfnROBfb>CVP92
+V04b^OQVlKfnROBfb>CVP92
+S1
+R0
+w1714167331
+8../tb/scoreboard.sv
+F../tb/scoreboard.sv
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+R14
+R15
+!i113 0
+R16
+R17
+R9
+Xsequences_read
+R1
+R18
+R19
+!i10b 1
+!s100 izZTF2<h1;]4@NSLSNQ990
+I[i_Q@h:iZ=c=KlJ;J]JDS2
+V[i_Q@h:iZ=c=KlJ;J]JDS2
+S1
+R0
+Z20 w1714091742
+8../tb/sequences_read.sv
+F../tb/sequences_read.sv
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+R14
+R15
+!i113 0
+R16
+R17
+R9
+Xsequences_write
+R1
+R18
+R19
+!i10b 1
+!s100 ?olR>?8mE4a[jEW:ZBfDG1
+Ihk_>jBEn;>V24Y;abkT:g2
+Vhk_>jBEn;>V24Y;abkT:g2
+S1
+R0
+R20
+8../tb/sequences_write.sv
+F../tb/sequences_write.sv
+L0 2
+R4
+r1
+!s85 0
+31
+R5
+R14
+R15
+!i113 0
+R16
+R17
+R9
 vsynchronizer
+R1
 R2
-R3
 !i10b 1
 !s100 oZ[AMVk]YXeYmQA84^0_62
 IOWTlCfiJ1TQH75;lA];H80
-R4
+R3
 !s105 synchronizer_sv_unit
 S1
 R0
@@ -129,23 +221,23 @@ w1712717302
 8../src/synchronizer.sv
 F../src/synchronizer.sv
 L0 1
-R5
+R4
 r1
 !s85 0
 31
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R1
 vwptr_handler
+R1
 R2
-R3
 !i10b 1
 !s100 S6Q`G=0fQe][[B0^cW:OC0
 I4V4<_ZLalkhQPjdXVFXBn0
-R4
+R3
 !s105 wptr_handler_sv_unit
 S1
 R0
@@ -153,13 +245,13 @@ w1712717050
 8../src/wptr_handler.sv
 F../src/wptr_handler.sv
 L0 1
-R5
+R4
 r1
 !s85 0
 31
+R5
 R6
 R7
-R8
 !i113 0
+R8
 R9
-R1
