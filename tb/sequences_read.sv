@@ -14,12 +14,23 @@ package sequences_read;
         // output
         logic [31:0] data_out;
         logic empty;
+        // bit empty_cond;
 
         // Add constraints here
         // When the AFIFO is empty, we can't read more value
-        // constraint async_fifo_empty {
-        //   ( empty == 1'b1 ) -> ( r_en == 1'b0 );
-        // }
+        function empty_cond;
+            if (empty) r_en = 0;
+            //else r_en = 1;
+        endfunction: empty_cond
+            // constraint async_fifo_empty {
+            //     empty_cond == (empty == 1);
+            //     r_en == $urandom_range(1); // Generate a random value of 0 or 1
+
+            //     // Adjust 'en' based on the value of 'full'
+            //     if (empty_cond == 1) // If 'full' is 1, 'en' must be 0
+            //         r_en == 0;
+            // // ( empty_cond == 1'b1 ) -> ( r_en == 1'b0 );
+            // }
 
         function new(string name = "");
             super.new(name);

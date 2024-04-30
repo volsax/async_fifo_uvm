@@ -13,11 +13,22 @@ package sequences_write;
         rand logic [31:0] data_in;
         // output
         logic full;
+        // bit full_cond;
 
         // Add constraints here
         // When the AFIFO is full, we can't write more value
+        function full_cond;
+            if (full) w_en = 0;
+            //else w_en = 1;
+        endfunction: full_cond
         // constraint async_fifo_full {
-        //   ( full == 1'b1 ) -> ( w_en == 1'b0 );
+        //     full_cond == (full == 1);
+        //     w_en == $urandom_range(1); // Generate a random value of 0 or 1
+
+        //     // Adjust 'en' based on the value of 'full'
+        //     if (full_cond == 1) // If 'full' is 1, 'en' must be 0
+        //         w_en == 0;
+        //   // ( full_cond == 1'b1 ) -> ( w_en == 1'b0 );
         // }
 
         // When write is not enabled, data_in should be 0
