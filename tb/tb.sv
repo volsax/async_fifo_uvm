@@ -10,18 +10,18 @@ import scoreboard::*;
 import tests::*;
 
 
-module dut(dut_write _wrif, dut_read _rrif);
+module dut(dut_write wrif, dut_read rrif);
 asynchronous_fifo async0(
-    .wclk(_wrif.wclk),
-    .wrst_n(_wrif.wrst_n),
-    .rclk(_rrif.rclk),
-    .rrst_n(_rrif.rrst_n),
-    .w_en(_wrif.w_en),
-    .r_en(_rrif.r_en),
-    .data_in(_wrif.data_in),
-    .data_out(_rrif.data_out),
-    .full(_wrif.full),
-    .empty(_rrif.empty)
+    .wclk(wrif.wclk),
+    .wrst_n(wrif.wrst_n),
+    .rclk(rrif.rclk),
+    .rrst_n(rrif.rrst_n),
+    .w_en(wrif.w_en),
+    .r_en(rrif.r_en),
+    .data_in(wrif.data_in),
+    .data_out(rrif.data_out),
+    .full(wrif.full),
+    .empty(rrif.empty)
 );
 endmodule: dut
 
@@ -43,15 +43,14 @@ end
 
 // TODO: Instantiate the dut module as dut1 and use the input as dut_in1 and output as dut_out1
 dut dut1(
-    ._wrif(dut_write1),
-    ._rrif(dut_read1)
+    .wrif(dut_write1),
+    .rrif(dut_read1)
 );
 
 initial begin
     uvm_config_db #(virtual dut_write)::set(null,"uvm_test_top","dut_vi_write",dut_write1);
     uvm_config_db #(virtual dut_read)::set(null,"uvm_test_top","dut_vi_read",dut_read1);
     uvm_top.finish_on_completion=1;
-
     //TODO:Modify the test name here
     run_test("test1");
 end

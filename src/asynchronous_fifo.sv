@@ -18,8 +18,6 @@ module asynchronous_fifo #(parameter DEPTH=64, DATA_WIDTH=32) (
   logic [PTR_WIDTH:0] b_wptr, b_rptr;
   logic [PTR_WIDTH:0] g_wptr, g_rptr;
 
-  logic [PTR_WIDTH-1:0] waddr, raddr;
-
   synchronizer #(PTR_WIDTH) sync_wptr (rclk, rrst_n, g_wptr, g_wptr_sync); //write pointer to read clock domain
   synchronizer #(PTR_WIDTH) sync_rptr (wclk, wrst_n, g_rptr, g_rptr_sync); //read pointer to write clock domain 
   

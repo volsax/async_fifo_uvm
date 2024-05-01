@@ -1,18 +1,17 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /async_fifo_TB/rclk
-add wave -noupdate /async_fifo_TB/r_en
-add wave -noupdate /async_fifo_TB/data_out
-add wave -noupdate /async_fifo_TB/wdata
-add wave -noupdate /async_fifo_TB/full
-add wave -noupdate /async_fifo_TB/empty
-add wave -noupdate /async_fifo_TB/data_in
-add wave -noupdate /async_fifo_TB/w_en
-add wave -noupdate /async_fifo_TB/wclk
-add wave -noupdate /async_fifo_TB/wrst_n
-add wave -noupdate /async_fifo_TB/rrst_n
+add wave -noupdate /top/dut_read1/rclk
+add wave -noupdate /top/dut_write1/wclk
+add wave -noupdate /top/dut_read1/rrst_n
+add wave -noupdate /top/dut_write1/wrst_n
+add wave -noupdate /top/dut_write1/w_en
+add wave -noupdate /top/dut_read1/r_en
+add wave -noupdate /top/dut_write1/data_in
+add wave -noupdate /top/dut_read1/data_out
+add wave -noupdate /top/dut_write1/full
+add wave -noupdate /top/dut_read1/empty
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1597 ns} 0}
+WaveRestoreCursors {{Cursor 1} {630900 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -26,6 +25,6 @@ configure wave -gridoffset 0
 configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
-configure wave -timelineunits ns
+configure wave -timelineunits ps
 update
-WaveRestoreZoom {1486 ns} {2252 ns}
+WaveRestoreZoom {0 ps} {5263200 ps}

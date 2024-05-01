@@ -8,7 +8,7 @@ package sequences_read;
         `uvm_object_utils(async_fifo_transaction_read)
 
         // input
-        rand logic rrst_n;
+        logic rrst_n;
         rand logic r_en;
 
         // output
@@ -22,6 +22,8 @@ package sequences_read;
             if (empty) r_en = 0;
             //else r_en = 1;
         endfunction: empty_cond
+
+        // constraint areset {rrst_n dist {0:=1, 1:=99};}
             // constraint async_fifo_empty {
             //     empty_cond == (empty == 1);
             //     r_en == $urandom_range(1); // Generate a random value of 0 or 1
@@ -55,9 +57,27 @@ package sequences_read;
             tr=async_fifo_transaction_read::type_id::create("tr");
             start_item(tr);
             assert(tr.randomize());
+            tr.rrst_n = 1;
             finish_item(tr);
         endtask: body
     endclass: simple_seq_read
+
+    class reset_seq_read extends uvm_sequence #(async_fifo_transaction_read);
+        `uvm_object_utils(reset_seq_read)
+
+        function new(string name = "");
+            super.new(name);
+        endfunction: new
+
+        task body;
+            async_fifo_transaction_read tr;
+            tr=async_fifo_transaction_read::type_id::create("tr");
+            start_item(tr);
+            tr.rrst_n = 0;
+            finish_item(tr);
+        endtask: body
+
+    endclass: reset_seq_read
 
     class seq_of_commands_read extends uvm_sequence #(async_fifo_transaction_read);
         `uvm_object_utils(seq_of_commands_read)

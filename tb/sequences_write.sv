@@ -8,7 +8,7 @@ package sequences_write;
         `uvm_object_utils(async_fifo_transaction_write)
         
         // input
-        rand logic wrst_n;
+        logic wrst_n;
         rand logic w_en;
         rand logic [31:0] data_in;
         // output
@@ -36,6 +36,8 @@ package sequences_write;
           ( w_en == 1'b0 ) -> ( data_in == 32'b0 );
         }
 
+        // constraint areset {wrst_n dist {0:=1, 1:=99};}
+
         function new(string name = "");
             super.new(name);
         endfunction: new
@@ -59,9 +61,27 @@ package sequences_write;
             tw=async_fifo_transaction_write::type_id::create("tw");
             start_item(tw);
             assert(tw.randomize());
+            tw.wrst_n = 1;
             finish_item(tw);
         endtask: body
     endclass: simple_seq_write
+
+    class reset_seq_write extends uvm_sequence #(async_fifo_transaction_write);
+        `uvm_object_utils(reset_seq_write)
+
+        function new(string name = "");
+            super.new(name);
+        endfunction: new
+
+        task body;
+            async_fifo_transaction_write tw;
+            tw=async_fifo_transaction_write::type_id::create("tw");
+            start_item(tw);
+            tw.wrst_n = 0;
+            finish_item(tw);
+        endtask: body
+
+    endclass: reset_seq_write
 
     class seq_of_commands_write extends uvm_sequence #(async_fifo_transaction_write);
         `uvm_object_utils(seq_of_commands_write)
@@ -74,9 +94,9 @@ package sequences_write;
         task body;
             repeat(200)
             begin
-                simple_seq_write seq_write;
+                simple_seq_write  seq_write;
                 seq_write = simple_seq_write::type_id::create("seq_write");
-                assert( seq_write.randomize() );
+                assert(seq_write.randomize() );
                 seq_write.start(p_sequencer);
             end
         endtask: body

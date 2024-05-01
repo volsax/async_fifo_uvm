@@ -150,20 +150,17 @@ class async_fifo_read_monitor extends uvm_monitor;
 
     task run_phase(uvm_phase phase);
     @(posedge dut_vi_read.rclk);
+    @(posedge dut_vi_read.rclk);
       forever
       begin
         async_fifo_transaction_read tx;    // TODO: create async fifo tx
         @(posedge dut_vi_read.rclk);
         tx = async_fifo_transaction_read::type_id::create("tx");
-
-	// TODO: Read the values from the virtual interface of dut_vi_in and
-        // assign them to the transaction "tx"
         tx.rrst_n = dut_vi_read.rrst_n;
         tx.r_en = dut_vi_read.r_en;
         tx.data_out = dut_vi_read.data_out;
         tx.empty = dut_vi_read.empty;
         aport.write(tx);           // read to the analysis port
-        
       end
     endtask: run_phase
 
